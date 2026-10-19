@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYTHORIA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+     <link href="https://unpkg.com/tailwindcss@1.9.6/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="logo-removebg-preview.png" alt="MYTHORIA Logo">
+        </a>
+        
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="opening.html">Opening Chamber</a></li>
+                <li><a href="grimoire.html">My Grimoire</a></li>
+                <li><a href="deck.html">My Deck</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="#" class="icon-btn" aria-label="Panier"><i class="fa-solid fa-cart-shopping"></i></a><span>0</span>
+        </div>
+    </header>
+
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <img src="logo-removebg-preview.png" alt="MYTHORIA" class="hero-title-img">
+
+            <p class="hero-subtitle">
+                ENTER THE DARKNESS.<br>
+                COLLECT THE LEGENDS.<br>
+                FORGE YOUR DESTINY.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="shop.html" class="btn btn-purple">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    DÉCOUVRIR LES BOOSTERS
+                </a>
+                <a href="grimoire.html" class="btn btn-outline">
+                    <i class="fa-solid fa-book-open"></i>
+                    OUVRIR MON GRIMOIRE
+                </a>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="categorie">
+        <h1>les categories de carts</h1>
+        <p>explore un monde rempli de creatures, de héros,de serviteurs et de sorts</p>
+        </div>
+        <div class="cards-grid" id="cards-container"></div>
+  </div>
+      </section>
+    <section>
+        <div class="container">
+            <div class="categorie">
+        <h1>BOOSTERS disponibles</h1>
+        <p>choisis ton booster et découvre des cartes rares et puissantes!</p>
+        </div>
+        <div class="cards-grid" id="cards-container"></div>
+  </div>
+      </section>
+
+    
+<script src="script.js"></script>
+</body>
+</html>
