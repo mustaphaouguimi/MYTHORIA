@@ -327,6 +327,12 @@ const boosters = [
 const container = document.getElementById("cards-container");
 const booster=document.getElementById("booster-container")
 const shopBooster=document.getElementById("boostershop")
+
+console.log("container:", container);
+console.log("booster:", booster);
+console.log("shopBooster:", shopBooster);
+
+
 function getIcon(monsterType) {
   if (monsterType === "Spellcaster") return "fa-solid fa-hat-wizard";
   if (monsterType === "Dragon") return "fa-solid fa-dragon";
@@ -334,8 +340,7 @@ function getIcon(monsterType) {
 }
 const firstFourCards = cards.slice(0, 4)
 function renderCards() {
-  container.innerHTML = firstFourCards.map(card => {
-    return `
+  container.innerHTML = firstFourCards.map(card =>  `
       <div class="card-item">
         <img class="card-image" src="${card.image}" alt="${card.name}">
         <div class="card-overlay">
@@ -349,8 +354,8 @@ function renderCards() {
           </div>
         </div>
       </div>
-    `;
-  });
+    `
+  );
 }
 
  function displayBooster() {
@@ -366,32 +371,53 @@ function renderCards() {
     </div>
   `).join("");
 }
-function boosterShop(){
- shopBooster.innerHTML = boosters.map(boost => `
-    <div class="card-item">
-      <img
-        class="card-image"
-        src="${boost.image}"
-        alt="${boost.name}"
-      >
-      <div class="card-overlay">
-        <h2 class="card-title">${boost.name}</h2>
 
-        <p class="card-subtitle">
-          ${boost.price} DH · ${boost.cardCount} cartes
-        </p>
-        <p>${boost.description}</p>
 
-        <button type="button">Add to cart</button>
+
+function boosterShop() {
+  shopBooster.innerHTML = boosters.map(boost => {
+  
+
+    return `
+      <div class="card-item">
+        <img
+          class="card-image"
+          src="${boost.image}"
+          alt="${boost.name}"
+        >
+
+        <div class="card-overlay">
+          <h2 class="card-title">${boost.name}</h2>
+
+          <p class="card-subtitle">
+            ${boost.price} DH · ${boost.cardCount} cartes
+          </p>
+
+          <p>${boost.description}</p>
+
+          <button type="button" class="btn btn-purple" class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700">Add to cart</button>
+
+
+
+        </div>
+
       </div>
-    </div>
-  `).join("");
-    
+      
+    `;
+  }).join("");
 }
 
 
 
 
-renderCards();
-displayBooster();
-boosterShop()
+if (container) {
+  renderCards();
+}
+
+if (booster) {
+  displayBooster();
+}
+
+if (shopBooster) {
+  boosterShop();
+}
