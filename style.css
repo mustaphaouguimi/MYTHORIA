@@ -313,3 +313,16 @@ body {
   gap: 20px;
   flex-wrap: wrap;
 }
+
+.pied-bas{
+    margin: 15px;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+.pied-bas img{
+    height: 35px;
+    width: auto;
+}

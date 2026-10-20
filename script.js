@@ -277,7 +277,7 @@ const boosters = [
   {
     id: 1,
     name: "Beginner Pack",
-    image: "assets/images/beginner-pack.png",
+    image: "bgn.jpg",
     description: "Un pack idéal pour les nouveaux joueurs.",
     price: 50,
     cardCount: 5,
@@ -288,7 +288,7 @@ const boosters = [
   {
     id: 2,
     name: "Summoning of the Legends",
-    image: "assets/images/legends-pack.png",
+    image: "bgn1.jpg",
     description: "Un pack premium avec plus de chances d'obtenir des cartes rares.",
     price: 80,
     cardCount: 5,
@@ -299,7 +299,7 @@ const boosters = [
   {
     id: 3,
     name: "Dark Summoning",
-    image: "assets/images/dark-summoning.png",
+    image: "bgn2.jpg",
     description: "Un booster consacré aux monstres des Ténèbres et aux sorts obscurs.",
     price: 100,
     cardCount: 5,
@@ -310,7 +310,7 @@ const boosters = [
   {
     id: 4,
     name: "Lucky Pack",
-    image: "assets/images/lucky-pack.png",
+    image: "bgn3.jpg",
     description: "Un pack mystère avec une chance de découvrir une carte exceptionnelle.",
     price: 200,
     cardCount: 5,
