@@ -314,6 +314,13 @@ body {
   flex-wrap: wrap;
 }
 
+.booster1 {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
 .pied-bas{
     margin: 15px;
     height: 80px;
@@ -325,4 +332,15 @@ body {
 .pied-bas img{
     height: 35px;
     width: auto;
+}
+
+.shop {
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
+  margin-top: 50px;
+}
+
+.shop-categorie {
+  text-align: center;
 }

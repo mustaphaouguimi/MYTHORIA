@@ -326,7 +326,7 @@ const boosters = [
 
 const container = document.getElementById("cards-container");
 const booster=document.getElementById("booster-container")
-
+const shopBooster=document.getElementById("boostershop")
 function getIcon(monsterType) {
   if (monsterType === "Spellcaster") return "fa-solid fa-hat-wizard";
   if (monsterType === "Dragon") return "fa-solid fa-dragon";
@@ -353,21 +353,10 @@ function renderCards() {
   });
 }
 
-
-
-
-
-
-
-
-
-
  function displayBooster() {
-
   booster.innerHTML = boosters.map(boost => `
     <div class="card-item">
       <img class="card-image" src="${boost.image}" alt="${boost.name}">
-
       <div class="card-overlay">
         <h2 class="card-title">${boost.name}</h2>
         <p class="card-subtitle">
@@ -377,6 +366,32 @@ function renderCards() {
     </div>
   `).join("");
 }
+function boosterShop(){
+ shopBooster.innerHTML = boosters.map(boost => `
+    <div class="card-item">
+      <img
+        class="card-image"
+        src="${boost.image}"
+        alt="${boost.name}"
+      >
+      <div class="card-overlay">
+        <h2 class="card-title">${boost.name}</h2>
+
+        <p class="card-subtitle">
+          ${boost.price} DH · ${boost.cardCount} cartes
+        </p>
+        <p>${boost.description}</p>
+
+        <button type="button">Add to cart</button>
+      </div>
+    </div>
+  `).join("");
+    
+}
+
+
+
 
 renderCards();
 displayBooster();
+boosterShop()
