@@ -216,6 +216,7 @@ body {
   flex-wrap: wrap;
 }
 
+
 .card-item {
   position: relative;
   width: 240px;
@@ -303,4 +304,12 @@ body {
   font-size: 0.75rem;
   color: #c5a059;
   font-weight: 600;
+}
+
+
+.booster {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }

@@ -273,12 +273,60 @@ const cards = [
 
 
 
+const boosters = [
+  {
+    id: 1,
+    name: "Beginner Pack",
+    image: "assets/images/beginner-pack.png",
+    description: "Un pack idéal pour les nouveaux joueurs.",
+    price: 50,
+    cardCount: 5,
+
+    
+  },
+
+  {
+    id: 2,
+    name: "Summoning of the Legends",
+    image: "assets/images/legends-pack.png",
+    description: "Un pack premium avec plus de chances d'obtenir des cartes rares.",
+    price: 80,
+    cardCount: 5,
+
+    
+  },
+
+  {
+    id: 3,
+    name: "Dark Summoning",
+    image: "assets/images/dark-summoning.png",
+    description: "Un booster consacré aux monstres des Ténèbres et aux sorts obscurs.",
+    price: 100,
+    cardCount: 5,
+
+    
+  },
+
+  {
+    id: 4,
+    name: "Lucky Pack",
+    image: "assets/images/lucky-pack.png",
+    description: "Un pack mystère avec une chance de découvrir une carte exceptionnelle.",
+    price: 200,
+    cardCount: 5,
+
+    
+  }
+];
+
+
+
 
 
 
 const container = document.getElementById("cards-container");
+const booster=document.getElementById("booster-container")
 
-// Map dial l-icones ala hssab monsterType aw attribute
 function getIcon(monsterType) {
   if (monsterType === "Spellcaster") return "fa-solid fa-hat-wizard";
   if (monsterType === "Dragon") return "fa-solid fa-dragon";
@@ -305,5 +353,30 @@ function renderCards() {
   });
 }
 
-// Render cards execution
+
+
+
+
+
+
+
+
+
+ function displayBooster() {
+
+  booster.innerHTML = boosters.map(boost => `
+    <div class="card-item">
+      <img class="card-image" src="${boost.image}" alt="${boost.name}">
+
+      <div class="card-overlay">
+        <h2 class="card-title">${boost.name}</h2>
+        <p class="card-subtitle">
+          ${boost.price} DH · ${boost.cardCount} cartes
+        </p>
+      </div>
+    </div>
+  `).join("");
+}
+
 renderCards();
+displayBooster();
