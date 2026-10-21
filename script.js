@@ -314,29 +314,65 @@ const boosters = [
 ];
 
 
-
-
-let boost=[];
-
 const container = document.getElementById("cards-container");
 const booster=document.getElementById("booster-container")
 const shopBooster=document.getElementById("boostershop")
-
-console.log("container:", container);
-console.log("booster:", booster);
-console.log("shopBooster:", shopBooster);
-
-
+const panier = document.querySelector('#panier')
 let count=document.getElementById("count")
-console.log(count)
+let countCart=0
 
 
 
-function getIcon(monsterType) {
-  if (monsterType === "Spellcaster") return "fa-solid fa-hat-wizard";
-  if (monsterType === "Dragon") return "fa-solid fa-dragon";
-  return "fa-solid fa-shield-halved";
+
+let cart=[];
+function addToCart(name, price,image) {
+    cart.push({
+        name: name,
+        price: price,
+        image:image
+        
+    });
+    console.log(cart);
+    afficherPanier()
+ 
 }
+
+
+function afficherPanier(){
+  panier.innerHTML=cart.map((p,index)=>`
+    <div class="">
+    <div>
+    <img class="w-30 h-40" src="${p.image}" alt="${p.name}">
+    </div>    
+<div>
+
+    <h2 class="">${p.name}</h2>
+          <p class=""> ${p.price} DH</p>
+          <div>
+          <button onclick="delate(${index})" class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700" ">supprimer</button>
+          </div>
+    
+    `).join("")
+}
+
+function delate(index){
+  cart.splice(index,1);
+  if(countCart>0) countCart-=1
+    count.textContent=countCart
+
+  afficherPanier()
+}
+
+
+
+
+
+
+
+
+
+
+
 const firstFourCards = cards.slice(0, 4)
 function renderCards() {
   container.innerHTML = firstFourCards.map(card =>  `
@@ -344,10 +380,9 @@ function renderCards() {
         <img class="card-image" src="${card.image}" alt="${card.name}">
         <div class="card-overlay">
           <div class="card-icon">
-            <i class="${getIcon(card.monsterType)}"></i>
           </div>
           <h2 class="card-title">${card.name}</h2>
-          <p class="card-subtitle">${card.monsterType} / ${card.subTypes}</p>
+          <p class="card-subtitle"> / ${card.subTypes}</p>
           <div class="card-stats">
             ATK: ${card.attack} | DEF: ${card.defense}
           </div>
@@ -372,6 +407,7 @@ function renderCards() {
 }
 
 function boosterShop() {
+   
   shopBooster.innerHTML = boosters.map(boost => {
     return `
       <div class="card-item">
@@ -380,24 +416,21 @@ function boosterShop() {
           src="${boost.image}"
           alt="${boost.name}"
         >
-
         <div class="card-overlay">
           <h2 class="card-title">${boost.name}</h2>
-
           <p class="card-subtitle">
             ${boost.price} DH · ${boost.cardCount} cartes
           </p>
-
           <p>${boost.description}</p>
-
-          <button type="button" id="btn"  class=" btn-purple inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700" onklick()>Add to cart</button>
+          <button type="button" id="btn"  class=" btn-purple inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700" onclick="addToCart('${boost.name}', '${boost.price}','${boost.image}')">Add to cart</button>
         </div>
       </div>
     `;
   }).join("");
 }
 
-let countCart=0
+
+
 function addBooster(){
   shopBooster.addEventListener('click', function(event) {
   const btn=event.target.closest(".add-to-cart")
@@ -405,6 +438,9 @@ function addBooster(){
   count.textContent=countCart
 });
 }
+
+
+
 
 if (container) {
   renderCards();
