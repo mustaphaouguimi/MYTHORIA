@@ -292,8 +292,6 @@ const boosters = [
     description: "Un pack premium avec plus de chances d'obtenir des cartes rares.",
     price: 80,
     cardCount: 5,
-
-    
   },
 
   {
@@ -303,8 +301,6 @@ const boosters = [
     description: "Un booster consacré aux monstres des Ténèbres et aux sorts obscurs.",
     price: 100,
     cardCount: 5,
-
-    
   },
 
   {
@@ -313,16 +309,14 @@ const boosters = [
     image: "bgn3.jpg",
     description: "Un pack mystère avec une chance de découvrir une carte exceptionnelle.",
     price: 200,
-    cardCount: 5,
-
-    
+    cardCount: 5,    
   }
 ];
 
 
 
 
-
+let boost=[];
 
 const container = document.getElementById("cards-container");
 const booster=document.getElementById("booster-container")
@@ -331,6 +325,11 @@ const shopBooster=document.getElementById("boostershop")
 console.log("container:", container);
 console.log("booster:", booster);
 console.log("shopBooster:", shopBooster);
+
+
+let count=document.getElementById("count")
+console.log(count)
+
 
 
 function getIcon(monsterType) {
@@ -372,12 +371,8 @@ function renderCards() {
   `).join("");
 }
 
-
-
 function boosterShop() {
   shopBooster.innerHTML = boosters.map(boost => {
-  
-
     return `
       <div class="card-item">
         <img
@@ -395,20 +390,21 @@ function boosterShop() {
 
           <p>${boost.description}</p>
 
-          <button type="button" class="btn btn-purple" class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700">Add to cart</button>
-
-
-
+          <button type="button" id="btn"  class=" btn-purple inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700" onklick()>Add to cart</button>
         </div>
-
       </div>
-      
     `;
   }).join("");
 }
 
-
-
+let countCart=0
+function addBooster(){
+  shopBooster.addEventListener('click', function(event) {
+  const btn=event.target.closest(".add-to-cart")
+  countCart++
+  count.textContent=countCart
+});
+}
 
 if (container) {
   renderCards();
@@ -421,3 +417,4 @@ if (booster) {
 if (shopBooster) {
   boosterShop();
 }
+addBooster()
