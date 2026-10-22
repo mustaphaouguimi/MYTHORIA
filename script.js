@@ -340,16 +340,18 @@ function addToCart(name, price,image) {
 
 function afficherPanier(){
   panier.innerHTML=cart.map((p,index)=>`
-    <div class="">
-    <div>
-    <img class="w-30 h-40" src="${p.image}" alt="${p.name}">
-    </div>    
-<div>
+  <div class= " flex justify-center gap-20">
+  <div class="">
 
-    <h2 class="">${p.name}</h2>
-          <p class=""> ${p.price} DH</p>
-          <div>
-          <button onclick="delate(${index})" class="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700" ">supprimer</button>
+    <img class="w-30 h-40" src="${p.image}" alt="${p.name}">
+  
+   <div>
+
+    <h2 class=".card-subtitle">${p.name}</h2>
+          <p class=".card-subtitle"> ${p.price} DH</p>
+        
+          <button onclick="delate(${index})" class="inline-flex items-center justify-center bg-red-800 border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm  border-slate-800 text-slate-50  " >supprimer</button>
+          </div>
           </div>
     
     `).join("")
@@ -364,26 +366,16 @@ function delate(index){
 }
 
 
-
-
-
-
-
-
-
-
-
 const firstFourCards = cards.slice(0, 4)
 function renderCards() {
   container.innerHTML = firstFourCards.map(card =>  `
       <div class="card-item">
-        <img class="card-image" src="${card.image}" alt="${card.name}">
-        <div class="card-overlay">
-          <div class="card-icon">
-          </div>
-          <h2 class="card-title">${card.name}</h2>
-          <p class="card-subtitle"> / ${card.subTypes}</p>
-          <div class="card-stats">
+        <img class="" src="${card.image}" alt="${card.name}">
+        <div class="">
+          
+          <h2 class="text-white">${card.name}</h2>
+          <p class=""> / ${card.subTypes}</p>
+          <div class="">
             ATK: ${card.attack} | DEF: ${card.defense}
           </div>
         </div>
@@ -394,10 +386,11 @@ function renderCards() {
 
  function displayBooster() {
   booster.innerHTML = boosters.map(boost => `
-    <div class="card-item">
-      <img class="card-image" src="${boost.image}" alt="${boost.name}">
-      <div class="card-overlay">
-        <h2 class="card-title">${boost.name}</h2>
+    
+    <div class="">
+      <img class="w-15 h-15" src="${boost.image}" alt="${boost.name}">
+      <div class="">
+        <h2 class="card-title gap-5">${boost.name}</h2>
         <p class="card-subtitle">
           ${boost.price} DH · ${boost.cardCount} cartes
         </p>
@@ -410,19 +403,19 @@ function boosterShop() {
    
   shopBooster.innerHTML = boosters.map(boost => {
     return `
-      <div class="card-item">
+      <div class="">
         <img
-          class="card-image"
+          class="w-15 h-15"
           src="${boost.image}"
           alt="${boost.name}"
         >
-        <div class="card-overlay">
-          <h2 class="card-title">${boost.name}</h2>
+        <div class="">
+          <h2 class="card-titel">${boost.name}</h2>
           <p class="card-subtitle">
             ${boost.price} DH · ${boost.cardCount} cartes
           </p>
           <p>${boost.description}</p>
-          <button type="button" id="btn"  class=" btn-purple inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700" onclick="addToCart('${boost.name}', '${boost.price}','${boost.image}')">Add to cart</button>
+          <button type="button" id="btn"  class="  bg-purple-700 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm   border-slate-800 text-slate-50  hover:border-slate-700" onclick="addToCart('${boost.name}', '${boost.price}','${boost.image}')">Add to cart</button>
         </div>
       </div>
     `;
