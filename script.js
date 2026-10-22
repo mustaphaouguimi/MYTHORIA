@@ -332,7 +332,7 @@ function addToCart(name, price,image) {
         image:image
         
     });
-    console.log(cart);
+
     afficherPanier()
  
 }
@@ -340,16 +340,11 @@ function addToCart(name, price,image) {
 
 function afficherPanier(){
   panier.innerHTML=cart.map((p,index)=>`
-  <div class= " flex justify-center gap-20">
-  <div class="">
-
+  <div class= " flex items-center gap-20">
     <img class="w-30 h-40" src="${p.image}" alt="${p.name}">
-  
    <div>
-
-    <h2 class=".card-subtitle">${p.name}</h2>
-          <p class=".card-subtitle"> ${p.price} DH</p>
-        
+    <h2 class="card-subtitle">${p.name}</h2>
+          <p class="card-subtitle"> ${p.price} DH</p>
           <button onclick="delate(${index})" class="inline-flex items-center justify-center bg-red-800 border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm  border-slate-800 text-slate-50  " >supprimer</button>
           </div>
           </div>
@@ -357,22 +352,19 @@ function afficherPanier(){
     `).join("")
 }
 
+
 function delate(index){
   cart.splice(index,1);
   if(countCart>0) countCart-=1
     count.textContent=countCart
-
   afficherPanier()
 }
-
-
 const firstFourCards = cards.slice(0, 4)
 function renderCards() {
   container.innerHTML = firstFourCards.map(card =>  `
       <div class="card-item">
         <img class="" src="${card.image}" alt="${card.name}">
-        <div class="">
-          
+        <div class=""> 
           <h2 class="text-white">${card.name}</h2>
           <p class=""> / ${card.subTypes}</p>
           <div class="">
@@ -386,9 +378,8 @@ function renderCards() {
 
  function displayBooster() {
   booster.innerHTML = boosters.map(boost => `
-    
-    <div class="">
-      <img class="w-15 h-15" src="${boost.image}" alt="${boost.name}">
+    <div class="transition-transform duration-300 hover:-translate-y-2">
+      <img class="w-15 h-15 " src="${boost.image}" alt="${boost.name}">
       <div class="">
         <h2 class="card-title gap-5">${boost.name}</h2>
         <p class="card-subtitle">
@@ -403,11 +394,8 @@ function boosterShop() {
    
   shopBooster.innerHTML = boosters.map(boost => {
     return `
-      <div class="">
-        <img
-          class="w-15 h-15"
-          src="${boost.image}"
-          alt="${boost.name}"
+      <div class="hover:-translate-y-2">
+        <img class="w-15 h-15" src="${boost.image}" alt="${boost.name}"
         >
         <div class="">
           <h2 class="card-titel">${boost.name}</h2>
@@ -415,7 +403,7 @@ function boosterShop() {
             ${boost.price} DH · ${boost.cardCount} cartes
           </p>
           <p>${boost.description}</p>
-          <button type="button" id="btn"  class="  bg-purple-700 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm   border-slate-800 text-slate-50  hover:border-slate-700" onclick="addToCart('${boost.name}', '${boost.price}','${boost.image}')">Add to cart</button>
+          <button type="button" id="btn"  class="  bg-purple-700 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm   border-slate-800 text-slate-50  hover:border-slate-700" onclick="addToCart('${boost.name}', '${boost.price}','${boost.image}')">ajouter au panier</button>
         </div>
       </div>
     `;

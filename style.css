@@ -1,12 +1,4 @@
-:root {
-    --bg-dark: #08050e;
-    --purple-glow: #8e24aa;
-    --purple-neon: #a855f7;
-    --gold-border: #8c733e;
-    --gold-glow: #d4af37;
-    --font-title: 'Cinzel', serif;
-    --font-body: 'Inter', sans-serif;
-}
+
 
 * {
     margin: 0;
@@ -14,12 +6,8 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: var(--bg-dark);
-    color: #ffffff;
-    font-family: var(--font-body);
-    overflow-x: hidden;
-}
+
+
 
 .header {
     position: absolute;
@@ -66,8 +54,8 @@ body {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: var(--purple-neon);
-    box-shadow: 0 0 10px var(--purple-neon);
+    background-color: #a855f7;
+    box-shadow: 0 0 10px #a855f7;
 }
 
 .header-actions {
@@ -83,7 +71,7 @@ body {
 }
 
 .header-actions .icon-btn:hover {
-    color: var(--purple-neon);
+    color: #a855f7;
 }
 
 
@@ -91,7 +79,7 @@ body {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    background: url('Gemini_Generated_Image_a941dza941dza941.jpg') center/cover no-repeat;
+    background: url('heroimage.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     padding: 0 8%;
@@ -124,7 +112,7 @@ body {
 }
 
 .hero-subtitle {
-    font-family: var(--font-title);
+    font-family: 'Cinzel', serif;
     font-size: 18px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -145,7 +133,7 @@ body {
     gap: 10px;
     padding: 12px 28px;
     border-radius: 25px;
-    font-family: var(--font-title);
+    font-family: 'Cinzel', serif;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -156,7 +144,7 @@ body {
 
 .btn-purple {
     color: #ffffff;
-    border: 1px solid var(--purple-neon);
+    border: 1px solid #a855f7;
     box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
     background-color:purple;
 }
@@ -168,7 +156,7 @@ body {
 
 .btn-outline {
     color: #e2d8ee;
-    border: 1px solid var(--gold-border);
+    border: 1px solid #8c733e;
     background-color:yellowgreen ;
 }
 
@@ -321,6 +309,9 @@ body {
 .pied-bas img{
     height: 35px;
     width: auto;
+}
+.pied-bas p{
+  color: #a0a5b5;
 }
 
 .shop {

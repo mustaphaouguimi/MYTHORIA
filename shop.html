@@ -9,19 +9,18 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-black text-white font-['Inter',sans-serif] overflow-x-hidden">
     <header class="header">
         <a href="index.html" class="logo">
-            <img src="logo-removebg-preview.png" alt="MYTHORIA Logo">
+            <img src="log.png" alt="MYTHORIA Logo">
         </a>
         
         <nav class="navbar">
             <ul>
-                <li><a href="index.html" >Home</a></li>
-                <li><a href="shop.html" class="active">Shop</a></li>
-                <li><a href="opening.html">Opening Chamber</a></li>
-                <li><a href="grimoire.html">My Grimoire</a></li>
-                <li><a href="deck.html">My Deck</a></li>
+                <li><a href="index.html" >Accueil</a></li>
+                <li><a href="shop.html" class="active">Boutique</a></li>
+                <li><a href="grimoire.html">Mon Grimoire</a></li>
+                <li><a href="deck.html">Mon Deck</a></li>
             </ul>
         </nav>
 
@@ -38,8 +37,7 @@
         <h1>BOOSTERS disponibles</h1>
         <p>choisis ton booster et découvre des cartes rares et puissantes!</p>
         </div>
-        <div class="flex justify-center gap-4" id="boostershop" ></div>
-
+        <div class="flex justify-center gap-4  -translate-y-0.5" id="boostershop" ></div>
   </div>
       </section>
 
@@ -47,7 +45,7 @@
     <section>
 
     <h2 class="m-[25px] text-inherit text-3xl #f3e5ab">Panier:</h2> 
-    <div id="panier" class="grid "></div>
+    <div id="panier" class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-center"></div>
     </section>
 
 
@@ -56,7 +54,13 @@
 
 
 
+ <footer>
+        <div class="pied-bas mb-20 p-20">
+            <img src="log.png" alt="MYTHORIA Logo" class="logo" >
 
+      <p>&copy; 2026 MYTHORIA. All rights reserved.</p>
+    </div>
+    </footer>
 
 
 
