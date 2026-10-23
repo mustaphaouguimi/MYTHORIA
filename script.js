@@ -319,23 +319,33 @@ const booster=document.getElementById("booster-container")
 const shopBooster=document.getElementById("boostershop")
 const panier = document.querySelector('#panier')
 let count=document.getElementById("count")
-let countCart=0
+let countCart=JSON.parse(localStorage.getItem("countCart")) ||0
 
 
+let arr=[]
 
-
-let cart=[];
+let cart=JSON.parse(localStorage.getItem("cart")) || [];
+countCart = cart.length;
+count.textContent = countCart;
 function addToCart(name, price,image) {
     cart.push({
         name: name,
         price: price,
-        image:image
-        
-    });
+        image:image,
+    });  
+    localStorage.setItem("cart", JSON.stringify(cart));
 
     afficherPanier()
- 
+    
+
 }
+
+
+
+
+
+
+
 
 
 function afficherPanier(){
@@ -355,8 +365,11 @@ function afficherPanier(){
 
 function delate(index){
   cart.splice(index,1);
-  if(countCart>0) countCart-=1
-    count.textContent=countCart
+  countCart=cart.length
+  count.textContent=countCart
+  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("countCart", JSON.stringify(countCart));
+
   afficherPanier()
 }
 const firstFourCards = cards.slice(0, 4)
@@ -403,22 +416,23 @@ function boosterShop() {
             ${boost.price} DH · ${boost.cardCount} cartes
           </p>
           <p>${boost.description}</p>
-          <button type="button" id="btn"  class="  bg-purple-700 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm   border-slate-800 text-slate-50  hover:border-slate-700" onclick="addToCart('${boost.name}', '${boost.price}','${boost.image}')">ajouter au panier</button>
+          <button type="button" id="btn" class="bg-purple-700 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm   border-slate-800 text-slate-50  hover:border-slate-700" onclick="addToCart('${boost.name}', '${boost.price}','${boost.image}')">ajouter au panier</button>
         </div>
       </div>
     `;
   }).join("");
 }
 
-
-
 function addBooster(){
-  shopBooster.addEventListener('click', function(event) {
-  const btn=event.target.closest(".add-to-cart")
+  shopBooster.addEventListener('click', (e)=> {
+  const btn=e.target.closest(".add-to-cart")
+
   countCart++
   count.textContent=countCart
+  localStorage.setItem("countCart", JSON.stringify(countCart));
 });
 }
+
 
 
 
@@ -435,3 +449,4 @@ if (shopBooster) {
   boosterShop();
 }
 addBooster()
+afficherPanier()
