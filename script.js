@@ -321,31 +321,31 @@ const panier = document.querySelector('#panier')
 let count=document.getElementById("count")
 let countCart=JSON.parse(localStorage.getItem("countCart")) ||0
 
+let quantite=0
 
-let arr=[]
+
 
 let cart=JSON.parse(localStorage.getItem("cart")) || [];
 countCart = cart.length;
 count.textContent = countCart;
 function addToCart(name, price,image) {
+  let produit=cart.find(p=>p.name===name)
+  if(produit){
+    produit.quantite++
+  }
+  else
+    {
     cart.push({
         name: name,
         price: price,
         image:image,
-    });  
+        quantite:1
+    });  }
+    console.log(cart)
     localStorage.setItem("cart", JSON.stringify(cart));
 
     afficherPanier()
-    
-
 }
-
-
-
-
-
-
-
 
 
 function afficherPanier(){
@@ -355,8 +355,13 @@ function afficherPanier(){
    <div>
     <h2 class="card-subtitle">${p.name}</h2>
           <p class="card-subtitle"> ${p.price} DH</p>
-          <button onclick="delate(${index})" class="inline-flex items-center justify-center bg-red-800 border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm  border-slate-800 text-slate-50  " >supprimer</button>
+          <p class="card-subtitle">quantite:${p.quantite}</p>
+          <button onclick="delate(${index})" class="inline-flex items-center justify-center 
+          bg-red-800 border align-middle select-none font-sans font-medium text-center transition-all 
+          duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full
+          focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm  border-slate-800 text-slate-50  " >supprimer</button>
           </div>
+
           </div>
     
     `).join("")
@@ -416,7 +421,10 @@ function boosterShop() {
             ${boost.price} DH · ${boost.cardCount} cartes
           </p>
           <p>${boost.description}</p>
-          <button type="button" id="btn" class="bg-purple-700 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm   border-slate-800 text-slate-50  hover:border-slate-700" onclick="addToCart('${boost.name}', '${boost.price}','${boost.image}')">ajouter au panier</button>
+          <button type="button" id="btn" class="bg-purple-700 inline-flex items-center justify-center border align-middle
+           select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none 
+           disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm 
+            border-slate-800 text-slate-50  hover:border-slate-700" onclick="addToCart('${boost.name}', '${boost.price}','${boost.image}')">ajouter au panier</button>
         </div>
       </div>
     `;
