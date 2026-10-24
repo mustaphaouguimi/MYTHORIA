@@ -281,7 +281,7 @@ const boosters = [
     description: "Un pack idéal pour les nouveaux joueurs.",
     price: 50,
     cardCount: 5,
-
+    
     
   },
 
@@ -321,9 +321,6 @@ const panier = document.querySelector('#panier')
 let count=document.getElementById("count")
 let countCart=JSON.parse(localStorage.getItem("countCart")) ||0
 
-let quantite=0
-
-
 
 let cart=JSON.parse(localStorage.getItem("cart")) || [];
 countCart = cart.length;
@@ -339,11 +336,11 @@ function addToCart(name, price,image) {
         name: name,
         price: price,
         image:image,
-        quantite:1
+        quantite:1,
+        
     });  }
-    console.log(cart)
+  
     localStorage.setItem("cart", JSON.stringify(cart));
-
     afficherPanier()
 }
 
@@ -360,18 +357,38 @@ function afficherPanier(){
           bg-red-800 border align-middle select-none font-sans font-medium text-center transition-all 
           duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full
           focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm  border-slate-800 text-slate-50  " >supprimer</button>
+          <button onclick="confirm()"  class="items-center justify-center 
+          bg-purple-800 border align-middle select-none font-sans font-medium text-center  
+          text-sm rounded-md py-2 px-4   border-slate-800 ">confirmer</button>
+          
           </div>
+          <p id="message" class="hidden"></p>
 
+          
           </div>
     
     `).join("")
 }
+ function confirm(){
+   const message=document.getElementById("message")
+   message.textContent = "Commande confirmée !"
+    message.classList.remove('hidden')
+   setTimeout(() => {
+   message.classList.add('hidden');
+}, 2000);  
+ }
+
 
 
 function delate(index){
+  if(cart[index].quantite>1){
+    cart[index].quantite--
+  }else{
   cart.splice(index,1);
-  countCart=cart.length
+  }
+  countCart = cart.reduce((total, p) => total + p.quantite, 0);
   count.textContent=countCart
+  
   localStorage.setItem("cart", JSON.stringify(cart));
   localStorage.setItem("countCart", JSON.stringify(countCart));
 
