@@ -281,8 +281,8 @@ const boosters = [
     description: "Un pack idéal pour les nouveaux joueurs.",
     price: 50,
     cardCount: 5,
-    
-    
+
+
   },
 
   {
@@ -309,48 +309,69 @@ const boosters = [
     image: "bgn3.jpg",
     description: "Un pack mystère avec une chance de découvrir une carte exceptionnelle.",
     price: 200,
-    cardCount: 5,    
+    cardCount: 5,
   }
 ];
 
 
 const container = document.getElementById("cards-container");
-const booster=document.getElementById("booster-container")
-const shopBooster=document.getElementById("boostershop")
+const booster = document.getElementById("booster-container")
+const shopBooster = document.getElementById("boostershop")
 const panier = document.querySelector('#panier')
-let count=document.getElementById("count")
-let countCart=JSON.parse(localStorage.getItem("countCart")) ||0
-const boostreVendu=document.getElementById("boostreVendu")
-const opening=document.getElementById("opening")
+let count = document.getElementById("count")
+let countCart = JSON.parse(localStorage.getItem("countCart")) || 0
+const boostreVendu = document.getElementById("boostreVendu")
+const opening = document.getElementById("opening")
+const gremoire = document.getElementById("gremoire")
+const filterInput=document.querySelector('#filter');
 
 
-let cart=JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 console.log(cart)
 countCart = cart.length;
 count.textContent = countCart;
-function addToCart(name, price,image) {
-  let produit=cart.find(p=>p.name===name)
-  if(produit){
+function addToCart(name, price, image) {
+  let produit = cart.find(p => p.name === name)
+  if (produit) {
     produit.quantite++
   }
-  else
-    {
+  else {
     cart.push({
-        name: name,
-        price: price,
-        image:image,
-        quantite:1,
-        
-    });  }
-  
-    localStorage.setItem("cart", JSON.stringify(cart));
-    afficherPanier()
+      name: name,
+      price: price,
+      image: image,
+      quantite: 1,
+
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  afficherPanier()
 }
+ 
+// filterInput.addEventListener('input',e=>{ 
+//   currentFilter=e.target.value.toLowerCase();
+//   const filtredCart=cards.filter(c=>c.monsterType)
+//   gremoire.innerHTML=filtredCart.map(g=>{
+//     `<div class="card-item">
+//     <img class="card-image" src="${g.image}" alt="${g.name}">
+//     <div class="card-overlay">
+//       <h2>${g.name}</h2>
+//       <p>${g.subTypes}</p>
+//       <p>ATK: ${g.attack} | DEF: ${g.defense}</p>
+//       <p>Rarty: ${g.rarity} </p>
+//     </div>
+//   </div>
+//     `
+//   })
+//  })
 
 
-function afficherPanier(){
-  panier.innerHTML=cart.map((p,index)=>{
-    return`
+
+
+function afficherPanier() {
+  panier.innerHTML = cart.map((p, index) => {
+    return `
   <div class= " flex items-center gap-20">
     <img class="w-30 h-40" src="${p.image}" alt="${p.name}">
    <div>
@@ -374,16 +395,15 @@ function afficherPanier(){
 }
 
 console.log(boostreVendu)
-function afficherboostreVendu(){
-    if (!boostreVendu) return;
-  boostreVendu.innerHTML=cart.map((p)=>`
+function afficherboostreVendu() {
+  if (!boostreVendu) return;
+  boostreVendu.innerHTML = cart.map((p) => `
   <div class= " flex items-center gap-20">
     <img class="w-30 h-40" src="${p.image}" alt="${p.name}">
    <div>
     <h2 class="card-subtitle">${p.name}</h2>
           <p class="card-subtitle"> ${p.price} DH</p>
           <p class="card-subtitle">quantite:${p.quantite}</p>
-          
            <button type="button" onclick="ouvrirBooster()" class=" 
           bg-purple-800 border   text-center  
           text-sm rounded-md py-2 px-4   border-slate-800"> Ouvrir le booster</button>
@@ -398,43 +418,66 @@ function afficherboostreVendu(){
 }
 
 
-
+//  = 
 function ouvrirBooster() {
-  const randomCards = [...cards].sort(() => Math.random() - 0.5).slice(0, 5);
-  opening.innerHTML = randomCards.map(c => `
+
+const randomCards = [...cards].sort(() => Math.random() - 0.5).slice(0, 5);
+localStorage.setItem("randomCards", JSON.stringify(randomCards));
+
+  opening.innerHTML = randomCards.map(c => {
+    return `
   <div class="card-item">
     <img class="card-image" src="${c.image}" alt="${c.name}">
     <div class="card-overlay">
       <h2>${c.name}</h2>
       <p>${c.subTypes}</p>
       <p>ATK: ${c.attack} | DEF: ${c.defense}</p>
+      <p>Rarty: ${c.rarity} </p>
     </div>
   </div>
-`).join("");
+`
+  }).join("");
+  console.log(randomCards)
+}
+
+function myGrimoire() {
+  const randomCards=JSON.parse(localStorage.getItem("randomCards"))
+  gremoire.innerHTML = randomCards.map(c=>`
+    <div class="card-item">
+    <img class="card-image" src="${c.image}" alt="${c.name}">
+    <div class="card-overlay">
+      <h2>${c.name}</h2>
+      <p>${c.subTypes}</p>
+      <p>ATK: ${c.attack} | DEF: ${c.defense}</p>
+      <p>Rarty: ${c.rarity} </p>
+    </div>
+  </div>
+    
+    
+    `).join("")
+  
+}
+
+function confirm() {
+  const message = document.getElementById("message")
+  message.textContent = "Commande confirmée !"
+  message.classList.remove('hidden')
+  setTimeout(() => {
+    message.classList.add('hidden');
+  }, 2000);
 }
 
 
 
- function confirm(){
-   const message=document.getElementById("message")
-   message.textContent = "Commande confirmée !"
-    message.classList.remove('hidden')
-   setTimeout(() => {
-   message.classList.add('hidden');
-}, 2000);  
- }
-
-
-
-function delate(index){
-  if(cart[index].quantite>1){
+function delate(index) {
+  if (cart[index].quantite > 1) {
     cart[index].quantite--
-  }else{
-  cart.splice(index,1);
+  } else {
+    cart.splice(index, 1);
   }
   countCart = cart.reduce((total, p) => total + p.quantite, 0);
-  count.textContent=countCart
-  
+  count.textContent = countCart
+
   localStorage.setItem("cart", JSON.stringify(cart));
   localStorage.setItem("countCart", JSON.stringify(countCart));
 
@@ -442,7 +485,7 @@ function delate(index){
 }
 const firstFourCards = cards.slice(0, 4)
 function renderCards() {
-  container.innerHTML = firstFourCards.map(card =>  `
+  container.innerHTML = firstFourCards.map(card => `
       <div class="card-item">
         <img class="card-image" src="${card.image}" alt="${card.name}">
         <div class="card-overlay"> 
@@ -457,7 +500,7 @@ function renderCards() {
   );
 }
 
- function displayBooster() {
+function displayBooster() {
   booster.innerHTML = boosters.map(boost => `
     <div class="transition-transform duration-300 hover:-translate-y-2">
       <img class="w-15 h-15 " src="${boost.image}" alt="${boost.name}">
@@ -472,7 +515,7 @@ function renderCards() {
 }
 
 function boosterShop() {
-   
+
   shopBooster.innerHTML = boosters.map(boost => {
     return `
       <div class="hover:-translate-y-2">
@@ -494,31 +537,16 @@ function boosterShop() {
   }).join("");
 }
 
-function addBooster(){
-    if (!shopBooster) return;
-
-  shopBooster.addEventListener('click', (e)=> {
-  const btn=e.target.closest(".add-to-cart")
-
-  countCart++
-  count.textContent=countCart
-  localStorage.setItem("countCart", JSON.stringify(countCart));
-});
+function addBooster() {
+  if (!shopBooster) return;
+  shopBooster.addEventListener('click', (e) => {
+    const btn = e.target.closest(".add-to-cart")
+    countCart++
+    count.textContent = countCart
+    localStorage.setItem("countCart", JSON.stringify(countCart));
+  });
 }
-// console.log(cards.sort(() => Math.random() -0.5));
-// let number = [1, 15, 2, 5, 6];
 
-// number.sort((a, b) => {
-//   console.log("a =", a, "b =", b);
-//   return a - b;
-// });
-
-// console.log(number);
-
-
-
-
-console.log(Math.random()*5)
 
 if (container) {
   renderCards();
@@ -533,11 +561,16 @@ if (shopBooster) {
 }
 
 addBooster()
-if(panier){
-afficherPanier()
+if (panier) {
+  afficherPanier()
 }
 
 
 if (boostreVendu) {
   afficherboostreVendu();
+}
+
+
+if (gremoire) {
+  myGrimoire()
 }
