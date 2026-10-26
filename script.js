@@ -184,6 +184,7 @@ const cards = [
     name: "Harpie's Feather Duster",
     image: "https://images.ygoprodeck.com/images/cards/18144506.jpg",
     type: "Spell",
+    monsterType:"Spell",
     spellType: "Normal",
     rarity: "Epic",
     description: "A powerful gust of wind sweeps the field.",
@@ -194,6 +195,8 @@ const cards = [
     name: "Monster Reborn",
     image: "https://images.ygoprodeck.com/images/cards/83764718.jpg",
     type: "Spell",
+    monsterType: "Spell",
+    subTypes:["fusion"],
     spellType: "Normal",
     rarity: "Rare",
     description: "A magical symbol that brings a monster back to life.",
@@ -204,6 +207,7 @@ const cards = [
     name: "Raigeki",
     image: "https://images.ygoprodeck.com/images/cards/12580477.jpg",
     type: "Spell",
+    monsterType: "Spell",
     spellType: "Normal",
     rarity: "Epic",
     description: "A devastating blast of lightning.",
@@ -214,6 +218,9 @@ const cards = [
     name: "Polymerization",
     image: "https://images.ygoprodeck.com/images/cards/24094653.jpg",
     type: "Spell",
+   monsterType: "Spell",
+    subTypes:["fusion"],
+
     spellType: "Normal",
     rarity: "Rare",
     description: "Combine monsters to create a powerful Fusion Monster.",
@@ -224,6 +231,8 @@ const cards = [
     name: "Mirror Force",
     image: "https://images.ygoprodeck.com/images/cards/44095762.jpg",
     type: "Trap",
+    monsterType: "Spell",
+
     trapType: "Normal",
     rarity: "Epic",
     description: "A reflective barrier turns an attack against the attacker.",
@@ -234,6 +243,8 @@ const cards = [
     name: "Mystical Space Typhoon",
     image: "https://images.ygoprodeck.com/images/cards/5318639.jpg",
     type: "Spell",
+    monsterType: "Spell",
+
     spellType: "Quick-Play",
     rarity: "Common",
     description: "A magical storm sweeps away a card.",
@@ -348,24 +359,32 @@ function addToCart(name, price, image) {
   localStorage.setItem("cart", JSON.stringify(cart));
   afficherPanier()
 }
- 
-// filterInput.addEventListener('input',e=>{ 
-//   currentFilter=e.target.value.toLowerCase();
-//   const filtredCart=cards.filter(c=>c.monsterType)
-//   gremoire.innerHTML=filtredCart.map(g=>{
-//     `<div class="card-item">
-//     <img class="card-image" src="${g.image}" alt="${g.name}">
-//     <div class="card-overlay">
-//       <h2>${g.name}</h2>
-//       <p>${g.subTypes}</p>
-//       <p>ATK: ${g.attack} | DEF: ${g.defense}</p>
-//       <p>Rarty: ${g.rarity} </p>
-//     </div>
-//   </div>
-//     `
-//   })
-//  })
-
+ if (filterInput){
+filterInput.addEventListener('input',e=>{ 
+  currentFilter=e.target.value.toLowerCase();
+  const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
+  
+  const filtredCart=randomCards.filter(c=>c.monsterType.toLowerCase().includes(currentFilter))
+    if(gremoire){
+   if(filtredCart.length===0){
+    gremoire.innerHTML="<p>Aucune carte ne correspond à votre recherche dans votre Grimoire.</p>"
+    return;   
+  }
+  gremoire.innerHTML=filtredCart.map(g=>
+    `<div class="card-item">
+    <img class="card-image" src="${g.image}" alt="${g.name}">
+    <div class="card-overlay">
+      <h2>${g.name}</h2>
+      <p>${g.subTypes}</p>
+      <p>ATK: ${g.attack} | DEF: ${g.defense}</p>
+      <p>Rarty: ${g.rarity} </p>
+    </div>
+  </div>
+    `
+  )
+}
+ })
+}
 
 
 
@@ -418,7 +437,7 @@ function afficherboostreVendu() {
 }
 
 
-//  = 
+
 function ouvrirBooster() {
 
 const randomCards = [...cards].sort(() => Math.random() - 0.5).slice(0, 5);
@@ -452,8 +471,6 @@ function myGrimoire() {
       <p>Rarty: ${c.rarity} </p>
     </div>
   </div>
-    
-    
     `).join("")
   
 }
