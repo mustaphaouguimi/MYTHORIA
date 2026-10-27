@@ -335,10 +335,12 @@ const boostreVendu = document.getElementById("boostreVendu")
 const opening = document.getElementById("opening")
 const gremoire = document.getElementById("gremoire")
 const filterInput=document.querySelector('#filter');
+const deck=document.getElementById("deck");
+const mycarts=document.getElementById("mycarts")
 
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-console.log(cart)
+
 countCart = cart.length;
 count.textContent = countCart;
 function addToCart(name, price, image) {
@@ -359,12 +361,12 @@ function addToCart(name, price, image) {
   localStorage.setItem("cart", JSON.stringify(cart));
   afficherPanier()
 }
+
  if (filterInput){
 filterInput.addEventListener('input',e=>{ 
   currentFilter=e.target.value.toLowerCase();
   const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
-  
-  const filtredCart=randomCards.filter(c=>c.monsterType.toLowerCase().includes(currentFilter))
+  const filtredCart=randomCards.filter(c=>c.rarity.toLowerCase().includes(currentFilter))
     if(gremoire){
    if(filtredCart.length===0){
     gremoire.innerHTML="<p>Aucune carte ne correspond à votre recherche dans votre Grimoire.</p>"
@@ -386,12 +388,10 @@ filterInput.addEventListener('input',e=>{
  })
 }
 
-
-
 function afficherPanier() {
   panier.innerHTML = cart.map((p, index) => {
     return `
-  <div class= " flex items-center gap-20">
+  <div class= "flex items-center gap-20">
     <img class="w-30 h-40" src="${p.image}" alt="${p.name}">
    <div>
     <h2 class="card-subtitle">${p.name}</h2>
@@ -404,10 +404,8 @@ function afficherPanier() {
           <button onclick="confirm()"  class="items-center justify-center 
           bg-purple-800 border align-middle select-none font-sans font-medium text-center  
           text-sm rounded-md py-2 px-4   border-slate-800 ">confirmer</button>
-          
           </div>
           <p id="message" class="hidden"></p>
-
           </div>
     
     `}).join("")
@@ -436,8 +434,6 @@ function afficherboostreVendu() {
 
 }
 
-
-
 function ouvrirBooster() {
 
 const randomCards = [...cards].sort(() => Math.random() - 0.5).slice(0, 5);
@@ -456,23 +452,127 @@ localStorage.setItem("randomCards", JSON.stringify(randomCards));
   </div>
 `
   }).join("");
-  console.log(randomCards)
+  
+}
+const decky=[]
+
+function mydeck() {
+  const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
+  if (!deck) return;
+  deck.innerHTML = randomCards.map((c) => `
+    <div class="relative w-60 h-[340px] overflow-hidden rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
+      <img
+        class="absolute inset-0 z-0 h-full w-full object-cover"
+        src="${c.image}"
+        alt="${c.name}"
+      >
+      <div class="absolute bottom-0 left-0 z-10 w-full bg-gradient-to-t from-black via-black/90 to-transparent p-3 text-center text-white">
+        <h2 class="mb-2 text-base font-bold uppercase tracking-wide text-white">
+          ${c.name}
+        </h2>
+        <p class="mb-1 text-sm text-purple-200">
+          ${c.subTypes}
+        </p>
+        <p class="mb-1 text-xs font-semibold text-yellow-300">
+          ATK: ${c.attack} | DEF: ${c.defense}
+        </p>
+
+        <p class="mb-2 text-xs text-gray-300">
+          Rarity: ${c.rarity}
+        </p>
+
+        <button
+          class="mt-2 w-full rounded-lg border border-purple-500 bg-purple-700/80 px-4 py-2 font-semibold text-white shadow-lg shadow-purple-900/40 transition duration-300 hover:scale-105 hover:border-yellow-400 hover:bg-purple-600 active:scale-95"
+          onclick="addToDeck('${c.name}','${c.image}','${c.attack}')"
+        >
+          <i class="fa-solid fa-plus mr-2"></i>
+          Ajouter au deck
+        </button>
+
+      </div>
+    </div>
+  `).join("");
 }
 
+function addToDeck(name,image,attack){
+  const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
+  let produit=decky.find(p=>name===p.name)
+  if(produit) return alert("this card already exist") 
+decky.push(
+  {
+    name:name,
+    image:image,
+    attack:attack
+  }
+)
+  if(!mycarts) return
+  mycarts.innerHTML=decky.map(c=>`
+    <div class=" w-60 h-[340px]  rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
+      <img class=" inset-0 z-0 h-full w-full object-cover" src="${c.image}" alt="${c.name}"
+      >
+      <div class=" bottom-0 left-0 z-10 w-full bg-gradient-to-t from-black via-black/90 to-transparent p-3 text-center text-white">
+        <h2 class="mb-2 text-base font-bold uppercase tracking-wide text-white">
+          ${c.name}
+        </h2>
+        <p class="mb-1 text-sm text-purple-200">
+          ${c.subTypes}
+        </p>
+        <p class="mb-1 text-xs font-semibold text-yellow-300">
+          ATK: ${c.attack} | DEF: ${c.defense}
+        </p>
+
+        <p class="mb-2 text-xs text-gray-300">
+          Rarity: ${c.rarity}
+        </p>
+</div>`)
+}
+
+
 function myGrimoire() {
-  const randomCards=JSON.parse(localStorage.getItem("randomCards"))
-  gremoire.innerHTML = randomCards.map(c=>`
-    <div class="card-item">
-    <img class="card-image" src="${c.image}" alt="${c.name}">
-    <div class="card-overlay">
-      <h2>${c.name}</h2>
-      <p>${c.subTypes}</p>
-      <p>ATK: ${c.attack} | DEF: ${c.defense}</p>
-      <p>Rarty: ${c.rarity} </p>
-    </div>
-  </div>
-    `).join("")
+  const gremoireGrid = document.getElementById("grimoire-grid");
+  const cardDetails = document.getElementById("card-details");
   
+  if (!gremoireGrid) return;
+
+  const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
+  
+  if (randomCards.length === 0) {
+    gremoireGrid.innerHTML = "<p class='col-span-3 text-center text-gray-700'>Aucune carte trouvée. Ouvrez un booster !</p>";
+    return;
+  }
+
+  gremoireGrid.innerHTML = randomCards.map((c, index) => `
+    <div onclick="showCardDetail(${index})" class="cursor-pointer bg-[#e3d0b9] p-2 rounded shadow border border-[#a88863] hover:scale-105 transition-transform">
+      <img class="w-full h-24 object-cover rounded" src="${c.image}" alt="${c.name}">
+      <p class="text-xs font-bold text-[#3b2716] truncate mt-1">${c.name}</p>
+    </div>
+  `).join("");
+}   
+
+function showCardDetail(index) {
+  const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
+  if (randomCards[index]) {
+    displayCardInfo(randomCards[index]);
+  }
+}
+
+function displayCardInfo(c) {
+  const cardDetails = document.getElementById("card-details");
+  if (!cardDetails) return;
+
+  cardDetails.innerHTML = `
+    <h2 class="text-3xl font-serif font-bold text-[#2c1d11] mb-4 m-8">${c.name}</h2>
+    <div class="border-4 border-[#3b2716] rounded-xl p-2 bg-[#d4c2a5] shadow-md mb-4 inline-block">
+      <img class="w-64 h-80 object-cover rounded-lg" src="${c.image}" alt="${c.name}">
+    </div>
+    <p class="text-sm italic text-[#4a3525] text-left px-2 mb-2">"${c.description}</p>
+    
+    <div class="text-xs font-bold text-[#5c4033] flex gap-4 mt-2">
+      ${`<span>ATK: ${c.attack}</span>`  }
+      ${`<span>DEF: ${c.defense}</span>` }
+      <span>Rarity: ${c.rarity}</span>
+    </div>
+  `;
 }
 
 function confirm() {
@@ -590,4 +690,8 @@ if (boostreVendu) {
 
 if (gremoire) {
   myGrimoire()
+}
+
+if(deck){
+  mydeck()
 }

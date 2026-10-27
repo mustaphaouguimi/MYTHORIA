@@ -6,7 +6,14 @@
     box-sizing: border-box;
 }
 
+.card-item {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); 
+  transition: transform 0.3s ease;
+}
 
+.card-item:hover {
+  transform: translateY(-5px) scale(1.03); 
+}
 
 
 .header {
