@@ -411,7 +411,7 @@ function afficherPanier() {
     `}).join("")
 }
 
-console.log(boostreVendu)
+
 function afficherboostreVendu() {
   if (!boostreVendu) return;
   boostreVendu.innerHTML = cart.map((p) => `
@@ -476,7 +476,6 @@ function mydeck() {
         <p class="mb-1 text-xs font-semibold text-yellow-300">
           ATK: ${c.attack} | DEF: ${c.defense}
         </p>
-
         <p class="mb-2 text-xs text-gray-300">
           Rarity: ${c.rarity}
         </p>
@@ -539,13 +538,13 @@ function myGrimoire() {
   const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
   
   if (randomCards.length === 0) {
-    gremoireGrid.innerHTML = "<p class='col-span-3 text-center text-gray-700'>Aucune carte trouvée. Ouvrez un booster !</p>";
+    gremoireGrid.innerHTML = "<p class='col-span-1 text-center text-gray-700'>Aucune carte trouvée. Ouvrez un booster !</p>";
     return;
   }
 
   gremoireGrid.innerHTML = randomCards.map((c, index) => `
-    <div onclick="showCardDetail(${index})" class="cursor-pointer bg-[#e3d0b9] p-2 rounded shadow border border-[#a88863] hover:scale-105 transition-transform">
-      <img class="w-full h-24 object-cover rounded" src="${c.image}" alt="${c.name}">
+    <div onclick="showCardDetail(${index})"   rounded shadow border  hover:scale-105 transition-transform">
+      <img class="w-20 h-24 " src="${c.image}" alt="${c.name}">
       <p class="text-xs font-bold text-[#3b2716] truncate mt-1">${c.name}</p>
     </div>
   `).join("");
@@ -568,11 +567,10 @@ function displayCardInfo(c) {
       <img class="w-64 h-80 object-cover rounded-lg" src="${c.image}" alt="${c.name}">
     </div>
     <p class="text-sm italic text-[#4a3525] text-left px-2 mb-2">"${c.description}</p>
-    
     <div class="text-xs font-bold text-[#5c4033] flex gap-4 mt-2">
       ${`<span>ATK: ${c.attack}</span>`  }
       ${`<span>DEF: ${c.defense}</span>` }
-      <span>Rarity: ${c.rarity}</span>
+      ${`<span>Rarity: ${c.rarity}</span>`}
     </div>
   `;
 }
