@@ -460,7 +460,7 @@ function mydeck() {
   const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
   if (!deck) return;
   deck.innerHTML = randomCards.map((c) => `
-    <div class="relative w-60 h-[340px] overflow-hidden rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
+    <div class=" flex flex-row relative w-60 h-[340px] overflow-hidden rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
       <img
         class="absolute inset-0 z-0 h-full w-full object-cover"
         src="${c.image}"
@@ -483,7 +483,7 @@ function mydeck() {
 
         <button
           class="mt-2 w-full rounded-lg border border-purple-500 bg-purple-700/80 px-4 py-2 font-semibold text-white shadow-lg shadow-purple-900/40 transition duration-300 hover:scale-105 hover:border-yellow-400 hover:bg-purple-600 active:scale-95"
-          onclick="addToDeck('${c.name}','${c.image}','${c.attack}')"
+          onclick="addToDeck('${c.name}','${c.image}','${c.attack}','${c.defense}','${c.rarity}')"
         >
           <i class="fa-solid fa-plus mr-2"></i>
           Ajouter au deck
@@ -494,29 +494,30 @@ function mydeck() {
   `).join("");
 }
 
-function addToDeck(name,image,attack){
+function addToDeck(name,image,attack,defense,rarity){
   const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
   let produit=decky.find(p=>name===p.name)
-  if(produit) return alert("this card already exist") 
+  if(produit) return alert("Cette carte existe déja") 
 decky.push(
   {
     name:name,
     image:image,
-    attack:attack
+    attack:attack,
+    defense:defense,
+    rarity:rarity
   }
 )
   if(!mycarts) return
   mycarts.innerHTML=decky.map(c=>`
-    <div class=" w-60 h-[340px]  rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
+    <div class="flex">
+    <div class=" relative  justify-between w-60 h-[340px]  rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
       <img class=" inset-0 z-0 h-full w-full object-cover" src="${c.image}" alt="${c.name}"
       >
       <div class=" bottom-0 left-0 z-10 w-full bg-gradient-to-t from-black via-black/90 to-transparent p-3 text-center text-white">
         <h2 class="mb-2 text-base font-bold uppercase tracking-wide text-white">
           ${c.name}
         </h2>
-        <p class="mb-1 text-sm text-purple-200">
-          ${c.subTypes}
-        </p>
+        
         <p class="mb-1 text-xs font-semibold text-yellow-300">
           ATK: ${c.attack} | DEF: ${c.defense}
         </p>
@@ -524,7 +525,8 @@ decky.push(
         <p class="mb-2 text-xs text-gray-300">
           Rarity: ${c.rarity}
         </p>
-</div>`)
+</div>
+</div>`).join("")
 }
 
 

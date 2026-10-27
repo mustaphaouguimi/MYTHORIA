@@ -345,3 +345,10 @@
  .hidden {
   display: none;
 }
+
+
+#mycarts{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
