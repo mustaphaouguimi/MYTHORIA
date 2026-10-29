@@ -92,27 +92,34 @@
                     <div class="battle-slot aspect-[0.9] min-w-0 border boredr-[#c2c2c2] "></div>
                 </div>
             </div>
-            <div class="health-bar player-health "></div>
             
         </div>
-        <div class="player-hand grid grid-cols-5 gap-[4px] py-4 px-2">
-                <div class="player-card min-w-0 h-[74px] p-[4px] flex flex-col gap-[3px] border boreder-[#aa8a22] rounded-[13px]"></div>
+        <div class="health-bar player-health mt-20 h-[14px] border border-[#b5a15a] bg-#b5a15a mr-auto w-[60%] "></div>
+
+        <div class="player-hand mt-16 grid grid-cols-5 gap-[4px] py-4 px-2">
+                <div class="player-card h-[74px] bg-#39382f border border-[#aa8a22]"></div>
                 
-                <div class="player-card min-w-0 h-[74px] p-[4px] flex flex-col gap-[3px] border boreder-[#aa8a22] rounded-[13px]"></div>
+                <div class="player-card h-[74px] bg-#39382f border border-[#aa8a22]"></div>
             
-                <div class="player-card min-w-0 h-[74px] p-[4px] flex flex-col gap-[3px] border boreder-[#aa8a22] rounded-[13px]"></div>
+                <div class="player-card h-[74px] bg-#39382f border border-[#aa8a22]"></div>
             
-                <div class="player-card min-w-0 h-[74px] p-[4px] flex flex-col gap-[3px] border boreder-[#aa8a22] rounded-[13px]"></div>
+                <div class="player-card h-[74px] bg-#39382f border border-[#aa8a22]"></div>
                 
-                <div class="player-card min-w-0 h-[74px] p-[4px] flex flex-col gap-[3px] border boreder-[#aa8a22] rounded-[13px]"></div>
+                <div class="player-card h-[74px] bg-#39382f border border-[#aa8a22]"></div>
             </div>
     </section>
-    <aside class="deck-area min-w-0 min-h-[100%] py-[16px] px-[6px] bg-#b8b8b8 gap-8px">
+    <aside class="deck-area min-w-0 min-h-full py-[16px] px-[6px] bg-#b8b8b8 grid grid-rows-[auto_1fr_auto] items-center justify-itmes-center gap-8px">
+        <div class="flex flex-col gap-[4px]">
         <div class="deck-card w-[100%] max-width-[66px] h-[110px] shrink-0 bg-#39352f border boreder-[#aa8a22] rounded-[16px] "></div>
         <div class="deck-count text-center text-[11px]">32cartes</div>
+        </div>
         <div class="add-card-area mt-auto flex flex-col align-center gap-[8px]">
         <div class="add-card small-deck h-[110px]"></div>
+        <div class="flex flex-col gap-[4px]">
         <button class="add-button text-white w-100% py-7px px-2px text-[9px] border border-[#aa8a22] :hover-bg-#356bc1">Add to hand</button>
+        <div class="deck-card w-[100%] max-width-[66px] h-[110px] mt-20 shrink-0 bg-#39352f border boreder-[#aa8a22] rounded-[16px] "></div>
+        <div class="deck-count text-center text-[11px]">32cartes</div>
+        </div>
     
     </aside>
     </div>
