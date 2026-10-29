@@ -31,25 +31,18 @@
         </div>
       
     </header>
-    <!-- <section class="mt-16">
-    <div id="arena" class="arena">
-        <h1 class="place-content-center mt-16">play arena</h1>
-    </div>
-    </section>
-    <section>
-        <div id="mycarts" class="flex mt-16 items-center justify-center"></div>
-    </section>
-   
-    
-  <div class="play">
-    <div class="player1"></div>
-    <div class="player2 text-white" id="player2" style="text-align: center; position: relative;"></div>
-    <div class="aside"></div>
-    <div class="halaba"></div>
-  </div> -->
 
   <main class="area-container mt-[110px] w-full max-w-[420px] mx-auto p-3 border border-[#ddd]">
-    <h2 class="area-title text-[18px] font-normal mb-3 text-[#555]">Pay arena</h2>
+    <div class="flex flex-col ">
+    <h2 class="area-title text-[18px] font-normal mb-3 text-[#555]">Play arena</h2>
+    <label for="mode-select" class="text-[13px] text-[#ccc] cursor-pointer">choisissez votre mode</label>
+    <div class="flex items-center gap-2">
+    <select id="mode-select" class="bg-[#2a2a2a] text-white text-[13px] py-1 px-3 border border-[3px]  cursor-pointer hover:border-[#d4af37]  ">
+        <option value="lumiere">Lumière </option>
+        <option value="dalam">Ténèbres</option>
+        
+    </select>
+    </div></div>
     <div class="arena-layout grid grid-cols-[minmax(0,1fr)_88px] gap-[10px]">
     <section class="game-area min-w-0 flex flex-col gap-[8px]">
         <div class="opponent-hand grid grid-cols-5 gap-[5px] py-5 px-2 bg-#f8e9a0">
