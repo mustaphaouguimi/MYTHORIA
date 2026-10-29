@@ -337,7 +337,7 @@ const gremoire = document.getElementById("gremoire")
 const filterInput=document.querySelector('#filter');
 const deck=document.getElementById("deck");
 const mycarts=document.getElementById("mycarts")
-
+const player2=document.getElementById("player2")
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -460,7 +460,7 @@ function mydeck() {
   const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
   if (!deck) return;
   deck.innerHTML = randomCards.map((c) => `
-    <div class=" flex flex-row relative w-60 h-[340px] overflow-hidden rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
+    <div class="  relative w-60 h-[340px] overflow-hidden rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
       <img
         class="absolute inset-0 z-0 h-full w-full object-cover"
         src="${c.image}"
@@ -494,7 +494,6 @@ function mydeck() {
 }
 
 function addToDeck(name,image,attack,defense,rarity){
-  const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
   let produit=decky.find(p=>name===p.name)
   if(produit) return alert("Cette carte existe déja") 
 decky.push(
@@ -505,7 +504,11 @@ decky.push(
     defense:defense,
     rarity:rarity
   }
+  
 )
+  
+
+
   if(!mycarts) return
   mycarts.innerHTML=decky.map(c=>`
     <div class="flex">
@@ -525,8 +528,25 @@ decky.push(
           Rarity: ${c.rarity}
         </p>
 </div>
+<button class="text-yellow-500 text-center border-rounded
+">anuler</button>
 </div>`).join("")
+
 }
+let decky2=
+
+function player(){
+  if(!player2) return
+  player2.innerHTML=decky.map(c=>`
+    <div class="flex">
+    <div class=" relative  justify-between w-60 h-[340px] overflow-hidden rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
+      <img class=" inset-0 z-0 h-full w-full object-cover h-15 w-15" src="${c.image}" alt="${c.name}"
+      >
+      
+</div>`).join("")
+console.log(player2)
+}
+console.log(player2)
 
 
 function myGrimoire() {
@@ -694,4 +714,8 @@ if (gremoire) {
 
 if(deck){
   mydeck()
+}
+
+if(player2){
+  player()
 }
