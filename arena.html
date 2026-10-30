@@ -39,7 +39,7 @@
     <div class="flex items-center gap-2">
     <select id="mode-select" class="bg-[#2a2a2a] text-white text-[13px] py-1 px-3 border border-[3px]  cursor-pointer hover:border-[#d4af37]  ">
         <option value="lumiere">Lumière </option>
-        <option value="dalam">Ténèbres</option>
+        <option value="tenebres">Ténèbres</option>
         
     </select>
     </div></div>
@@ -53,7 +53,7 @@
             <div class="opponent-card  h-[74] bg-#3932f border border-[#aa8a22]"></div>
 
         </div>
-        <div class="health-bar opponent-health h-[14px] border border-[#b5a15a] bg-#b5a15a ml-auto w-[60%]"></div>
+        <div class="health-bar opponent-health h-[14px] border border-[#b5a15a] bg-red-500 ml-auto w-[60%]"></div>
         <div class="battlefield flex flex-col border border-[#e6e6e6]">
             <div class="battle-row grid grid-cols-5">
                 <div class="battle-slot min-w-0 boredr border-[#c2c2c2] aspect-[0.9] :hover-border[#d9d9d9]"></div>
@@ -87,7 +87,7 @@
             </div>
             
         </div>
-        <div class="health-bar player-health mt-20 h-[14px] border border-[#b5a15a] bg-#b5a15a mr-auto w-[60%] "></div>
+        <div class="health-bar player-health mt-20 h-[14px] color-red border border-[#b5a15a] bg-red-500 mr-auto w-[70%] "></div>
 
         <div class="player-hand mt-16 grid grid-cols-5 gap-[4px] py-4 px-2">
                 <div class="player-card h-[74px] bg-#39382f border border-[#aa8a22]"></div>
@@ -104,14 +104,14 @@
     <aside class="deck-area min-w-0 min-h-full py-[16px] px-[6px] bg-#b8b8b8 grid grid-rows-[auto_1fr_auto] items-center justify-itmes-center gap-8px">
         <div class="flex flex-col gap-[4px]">
         <div class="deck-card w-[100%] max-width-[66px] h-[110px] shrink-0 bg-#39352f border boreder-[#aa8a22] rounded-[16px] "></div>
-        <div class="deck-count text-center text-[11px]">32cartes</div>
+        <div class="deck-count text-center text-[11px]">10cartes</div>
         </div>
         <div class="add-card-area mt-auto flex flex-col align-center gap-[8px]">
         <div class="add-card small-deck h-[110px]"></div>
         <div class="flex flex-col gap-[4px]">
         <button class="add-button text-white w-100% py-7px px-2px text-[9px] border border-[#aa8a22] :hover-bg-#356bc1">Add to hand</button>
         <div class="deck-card w-[100%] max-width-[66px] h-[110px] mt-20 shrink-0 bg-#39352f border boreder-[#aa8a22] rounded-[16px] "></div>
-        <div class="deck-count text-center text-[11px]">32cartes</div>
+        <div class="deck-count text-center text-[11px]">10cartes</div>
         </div>
     
     </aside>

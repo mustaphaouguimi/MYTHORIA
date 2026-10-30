@@ -336,7 +336,7 @@ const opening = document.getElementById("opening")
 const gremoire = document.getElementById("gremoire")
 const filterInput=document.querySelector('#filter');
 const deck=document.getElementById("deck");
-const mycarts=document.getElementById("mycarts")
+let mycarts=document.getElementById("mycarts")
 const player2=document.getElementById("player2")
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -454,7 +454,7 @@ localStorage.setItem("randomCards", JSON.stringify(randomCards));
   }).join("");
   
 }
-const decky=[]
+const decky=JSON.parse(localStorage.getItem("decky"))||[]
 
 function mydeck() {
   const randomCards = JSON.parse(localStorage.getItem("randomCards")) || [];
@@ -487,15 +487,14 @@ function mydeck() {
           <i class="fa-solid fa-plus mr-2"></i>
           Ajouter au deck
         </button>
-
       </div>
     </div>
   `).join("");
 }
 
 function addToDeck(name,image,attack,defense,rarity){
-  let produit=decky.find(p=>name===p.name)
-  if(produit) return alert("Cette carte existe déja") 
+  let produit=decky.find(p=>name===p.name);
+  if(produit) return alert("Cette carte existe déja") ;
 decky.push(
   {
     name:name,
@@ -504,36 +503,40 @@ decky.push(
     defense:defense,
     rarity:rarity
   }
-  
-)
-  
+ 
+) ;
+afichdeck()
+}
 
+function afichdeck(){
 
   if(!mycarts) return
-  mycarts.innerHTML=decky.map(c=>`
-    <div class="flex">
+  mycarts.innerHTML=`
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+   ${ decky.map((c,index)=>`
     <div class=" relative  justify-between w-60 h-[340px]  rounded-xl bg-slate-950 shadow-xl shadow-black/50 transition duration-300 hover:-translate-y-1 hover:scale-105">
-      <img class=" inset-0 z-0 h-full w-full object-cover" src="${c.image}" alt="${c.name}"
+      <img class=" absolute inset-0 z-0 h-full w-full object-cover" src="${c.image}" alt="${c.name}"
       >
-      <div class=" bottom-0 left-0 z-10 w-full bg-gradient-to-t from-black via-black/90 to-transparent p-3 text-center text-white">
+      <div class="absolute  bottom-0 left-0 z-10 w-full bg-gradient-to-t from-black via-black/90 to-transparent p-3 text-center text-white">
         <h2 class="mb-2 text-base font-bold uppercase tracking-wide text-white">
           ${c.name}
         </h2>
         
-        <p class="mb-1 text-xs font-semibold text-yellow-300">
-          ATK: ${c.attack} | DEF: ${c.defense}
-        </p>
+        <button onclick="removeCard(${index})" class="text-yellow-500 text-center w-30 bg-yellow-700/80 px-4  border rounded">anuler</button>
 
-        <p class="mb-2 text-xs text-gray-300">
-          Rarity: ${c.rarity}
-        </p>
 </div>
-<button class="text-yellow-500 text-center border-rounded
-">anuler</button>
-</div>`).join("")
+</div>`).join("")}
+</div>`
+localStorage.setItem("mycarts",JSON.stringify(mycarts))
 
 }
-let decky2=
+function removeCard(index){
+decky.splice(index,1)
+localStorage.setItem("myCarts",JSON.stringify(decky))
+afichdeck()
+}
+
+
 
 function player(){
   if(!player2) return
@@ -718,4 +721,8 @@ if(deck){
 
 if(player2){
   player()
+}
+
+if(mycarts){
+  afichdeck()
 }
